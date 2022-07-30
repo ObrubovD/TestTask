@@ -1,0 +1,18 @@
+Сначала создадим структуру БД:
+
+    CREATE TABLE Products(id INT PRIMARY KEY, name VARCHAR(255) NOT NULL);
+    CREATE TABLE Category(id INT PRIMARY KEY, name VARCHAR(255) NOT NULL);
+    CREATE TABLE ProdCat(products_id INT NOT NULL, category_id INT NOT NULL);
+
+Заполним базы данных:
+
+    INSERT INTO Products VALUES(1, 'Ручка'), (2, 'Циркуль'), (3, 'Вилка');
+    INSERT INTO Category VALUES(1, 'Канцелярские принадлежности'), (2, 'Столовые приборы');
+    INSERT INTO ProdCat VALUES(1, 1), (2, 1), (3, 2);
+
+Решение задачи:
+
+    SELECT prod.name [продукт], cat.name [категория] FROM Products prod
+        LEFT FOIN ProdCat prodcat ON prod.id = prodcat.products_id
+        INNER JOIN Category cat ON cat.id = prodcat.category_id
+    ORDER BY prod.name;
